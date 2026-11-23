@@ -1,10 +1,30 @@
-[theme]
-primaryColor="#F63366"
-backgroundColor="#FFFFFF"
-secondaryBackgroundColor="#F0F2F6"
-textColor="#262730"
-font="sans serif"
+[theme.light]
+primaryColor = "#242321"
+backgroundColor = "#FAF8F4"
+secondaryBackgroundColor = "#F1EDE6"
+textColor = "#1F1E1C"
+
+[theme.dark]
+primaryColor = "#E9E4DA"
+backgroundColor = "#131312"
+secondaryBackgroundColor = "#1A1A18"
+textColor = "#ECEAE5"
+
+# The page also applies the selected palette (see ui_theme.py); the values above are
+# the neutral defaults for Streamlit's own widgets. Fonts are embedded by the app.
+
+[client]
+toolbarMode = "minimal"      # hides the "Deploy" button
+showErrorDetails = "none"    # never show stack traces / file paths to visitors (logs keep them)
+
+[browser]
+gatherUsageStats = false     # no telemetry
+
 [server]
-enableXsrfProtection = false
-enableCORS = false
-enableStaticServing = true
+maxUploadSize = 15           # MB; keep in sync with MAX_UPLOAD_BYTES in image_utils.py
+maxMessageSize = 50          # MB; caps what one websocket message can carry (default 200)
+enableXsrfProtection = true  # uploads need a valid token
+enableCORS = true            # cross-origin websocket connections are refused
+# In production, list the exact host name(s) you serve from. This blocks DNS-rebinding
+# attacks. Left empty here because it depends on where you deploy (see SECURITY.md):
+# allowedHosts = ["app.example.com"]

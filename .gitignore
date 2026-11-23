@@ -1,0 +1,74 @@
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+.pytest_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDEs and editors
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# -----------------------------------------------------------------------
+# Project-specific: session / AI history and internal reports
+# These files are for local reference only and should not be published.
+# -----------------------------------------------------------------------
+
+# Claude / AI session history
+claude_history.md
+
+# Internal project documentation (reports, presentation prompts)
+PROJECT_REPORT.md
+PRESENTATION_PROMPT.md
+
+# Any other Markdown files that are session notes or AI-generated drafts
+# (README.md, SECURITY.md and assets/fonts/README.md are intentionally NOT excluded)
+
+# -----------------------------------------------------------------------
+# static/ — old Amazon screenshot banners
+# These 36 PNGs (~20 MB) are from the original version of the project.
+# Static file serving is now OFF; the app uses live product cards instead.
+# They are unused, bloat the repo, and contained private account details.
+# -----------------------------------------------------------------------
+static/
+
+# -----------------------------------------------------------------------
+# Data and model artifacts
+# -----------------------------------------------------------------------
+
+# The trained model is 82 MB.  It is kept in git because it is under
+# GitHub's 100 MB limit, but you can move it to Git LFS at any time:
+#   git lfs track "export.pkl"
+# Uncomment the line below only if you decide to exclude it entirely:
+# export.pkl
+
+# Local test images / scratch photos used during development
+scratch/
+tmp/
+*.test.jpg
+*.test.png
+
+# -----------------------------------------------------------------------
+# Logs and temporary files
+# -----------------------------------------------------------------------
+*.log
+*.tmp
+*.bak
+*.orig
+

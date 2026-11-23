@@ -1,0 +1,34 @@
+# Face Skin AI: Caddy reverse proxy with the security baseline from SECURITY.md.
+#
+# Replace app.example.com and run Streamlit bound to localhost ONLY:
+#   streamlit run streamlit_app.py --server.address 127.0.0.1 --server.port 8501
+# Caddy obtains and renews the HTTPS certificate automatically and handles WebSockets.
+# Header values are copied from deploy/security_headers.json (tests/test_deploy.py keeps
+# them in sync). Verify a deployment with:
+#   python scripts/check_security.py https://app.example.com
+#
+# NOTE: this file has not been executed in the project's test environment (Caddy was not
+# available there). Run `caddy validate --config Caddyfile` before using it.
+# Per-IP rate limiting needs the optional caddy-ratelimit module, or a CDN/WAF in front.
+
+app.example.com {
+	encode zstd gzip
+
+	request_body {
+		max_size 16MB
+	}
+
+	header {
+		-Server
+		Content-Security-Policy "default-src 'self'; script-src 'self' 'sha256-THxz9J9+wf7rhwR2YkXJoSZ13UCmYyC+3lNDv2+8ugA='; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' data:; media-src 'self' blob:; connect-src 'self' data:; worker-src 'self' blob:; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "no-referrer"
+		Permissions-Policy "camera=(self), microphone=(), geolocation=(), payment=(), usb=(), interest-cohort=()"
+		Cross-Origin-Opener-Policy "same-origin"
+		Cross-Origin-Resource-Policy "same-origin"
+		Strict-Transport-Security "max-age=63072000; includeSubDomains"
+	}
+
+	reverse_proxy 127.0.0.1:8501
+}
